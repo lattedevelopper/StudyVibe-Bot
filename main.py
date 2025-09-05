@@ -3,7 +3,7 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler
 
 # Замените на ваш токен от BotFather
-TOKEN = "YOUR_BOT_TOKEN_HERE"
+TOKEN = "8490585937:AAGa8Po7KC4v6vhaQHSJficyrL8mPjhorQk"
 
 async def start(update: Update, context):
     """Обработчик команды /start"""
