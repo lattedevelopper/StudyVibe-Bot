@@ -1,12 +1,20 @@
 import os
-from telegram import Update
-from telegram.ext import Application, CommandHandler
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import Application, CommandHandler, CallbackQueryHandler
 
-# Получаем токен из переменных окружения Railway
-TOKEN = ('8490585937:AAGa8Po7KC4v6vhaQHSJficyrL8mPjhorQk')
+# Замените на ваш токен
+TOKEN = "8490585937:AAGa8Po7KC4v6vhaQHSJficyrL8mPjhorQk"
 
 async def start(update: Update, context):
-    await update.message.reply_text("Привет! Я работаю на Railway 24/7!")
+    """Обработчик команды /start"""
+    # Текст сообщения
+    message_text = "👋 Привет! Добро пожаловать в Study Vibe! 📚 Я твой персональный помощник с домашними заданиями. Нажми кнопку - Open, чтобы открыть Study Vibe."
+    
+    # Отправляем сообщение с кнопкой
+    await update.message.reply_text(
+        text=message_text,
+        reply_markup=reply_markup
+    )
 
 def main():
     if not TOKEN:
@@ -14,9 +22,11 @@ def main():
         return
     
     app = Application.builder().token(TOKEN).build()
+    
+    # Добавляем обработчики
     app.add_handler(CommandHandler("start", start))
     
-    print("Бот запущен на Railway...")
+    print("Study Vibe бот запущен на Railway...")
     app.run_polling()
 
 if __name__ == "__main__":
