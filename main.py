@@ -1,25 +1,22 @@
-import asyncio
+import os
 from telegram import Update
 from telegram.ext import Application, CommandHandler
 
-# Замените на ваш токен от BotFather
-TOKEN = "8490585937:AAGa8Po7KC4v6vhaQHSJficyrL8mPjhorQk"
+# Получаем токен из переменных окружения Railway
+TOKEN = os.environ.get('8490585937:AAGa8Po7KC4v6vhaQHSJficyrL8mPjhorQk')
 
 async def start(update: Update, context):
-    """Обработчик команды /start"""
-    await update.message.reply_text("Привет! Я простой бот. Напиши /start чтобы поздороваться!")
+    await update.message.reply_text("Привет! Я работаю на Railway 24/7!")
 
 def main():
-    """Основная функция запуска бота"""
-    # Создаем приложение
-    app = Application.builder().token(TOKEN).build()
+    if not TOKEN:
+        print("Ошибка: BOT_TOKEN не найден!")
+        return
     
-    # Добавляем обработчик команды /start
+    app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     
-    print("Бот запущен и ожидает сообщения...")
-    
-    # Запускаем бота
+    print("Бот запущен на Railway...")
     app.run_polling()
 
 if __name__ == "__main__":
